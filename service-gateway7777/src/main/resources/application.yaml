@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: service-gateway7777
+  cloud:
+    gateway:
+      routes:
+        - id: users
+          uri: lb://servicebreak-resttemplate8093
+          predicates:
+            - Path=/users/**
+        - id: hellos
+          uri: lb://servicebreak-openfeign8094
+          predicates:
+            - Path=/hellos/**
+server:
+  port: 7777
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/

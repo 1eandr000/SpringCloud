@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: service-zuul6666
+server:
+  port: 6666
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+zuul:
+  routes:
+    users:
+      path: /users/**
+      serviceId: servicebreak-resttemplate8093
+    hellos:
+      path: /hellos/**
+      serviceId: servicebreak-openfeign8094
+  retryable: true

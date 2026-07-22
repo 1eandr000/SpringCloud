@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: servicebreak-openfeign8094
+server:
+  port: 8094
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+feign:
+  hystrix:
+    enabled: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show_details: always
+hystrix:
+  dashboard:
+    proxy-stream-allow-list: "localhost"

@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: servicebreak-resttemplate8093
+server:
+  port: 8093
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show_details: always
+hystrix:
+  dashboard:
+    proxy-stream-allow-list: "localhost"
