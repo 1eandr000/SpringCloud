@@ -17,7 +17,7 @@ public class UserController {
 //    LoadBalancerClient loadBalancerClient;
 
     @RequestMapping("/find")
-    public String find(@RequestParam("id") int id){
+    public Object find(@RequestParam("id") int id){
 //        RestTemplate rt=new RestTemplate();
 //        方法一
 //        String result = rt.getForObject("http://localhost:8081/hello?userName="+userName,String.class);
@@ -28,8 +28,12 @@ public class UserController {
 //        String result=rt.getForObject(url,String.class);
 
 //        方法三
-        String result=restTemplate.getForObject("http://service-user8081/find?id="+id,String.class);
+        return restTemplate.getForObject("http://service-user8081/find?id="+id, Object.class);
 
-        return result;
+    }
+
+    @RequestMapping("/login")
+    public Object login(@RequestParam String username, @RequestParam String password){
+        return restTemplate.getForObject("http://service-user8081/login?username="+username+"&password="+password, Object.class);
     }
 }

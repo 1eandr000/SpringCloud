@@ -15,4 +15,8 @@ public class UserService {
     public User findById(int id){
         return userMapper.findById(id);
     }
+
+    public User login(String username, String password) {
+        return userMapper.findByUsernameAndPassword(username, password);
+    }
 }

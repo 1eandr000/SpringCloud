@@ -5,11 +5,18 @@
 
 <mapper namespace="com.leandro.mapper.UserMapper">
 
-    <!-- user 是 MySQL 关键字，表名必须加反引号 -->
     <select id="findById" resultType="com.leandro.entity.User">
         SELECT id, username, password, name, gender, age, money, card, phone
         FROM `user`
         WHERE id = #{id}
+    </select>
+
+    <select id="findByUsernameAndPassword" resultType="com.leandro.entity.User">
+        SELECT id, username, password, name, gender, age, money, card, phone
+        FROM `user`
+        WHERE username = #{username}
+        AND password = #{password}
+        LIMIT 1
     </select>
 
 </mapper>

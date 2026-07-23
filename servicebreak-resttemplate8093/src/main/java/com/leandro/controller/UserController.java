@@ -7,33 +7,25 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/users")
 public class UserController {
-//    方法三
+
     @Autowired
     private RestTemplate restTemplate;
 
-//  方法二
-//    @Resource
-//    LoadBalancerClient loadBalancerClient;
-
     @RequestMapping("/find")
     @HystrixCommand(fallbackMethod = "findError")
-    public String find(@RequestParam("id") int id){
-//        RestTemplate rt=new RestTemplate();
-//        方法一
-//        String result = rt.getForObject("http://localhost:8081/hello?userName="+userName,String.class);
+    public Object find(@RequestParam("id") int id){
 
-//        方法二
-//        ServiceInstance instance=loadBalancerClient.choose("service_user8081");
-//        String url="http://"+instance.getHost()+":"+instance.getPort()+"/hello?userName="+userName;
-//        String result=rt.getForObject(url,String.class);
+        return restTemplate.getForObject("http://service-user8081/find?id="+id, Object.class);
+    }
 
-//        方法三
-        String result=restTemplate.getForObject("http://service-user8081/find?id="+id,String.class);
-
-        return result;
+    @RequestMapping ("/login")
+    public Object login(@RequestParam String username, @RequestParam String password){
+        return restTemplate.getForObject("http://service-user8081/login?username="+username+"&password="+password, Object.class);
     }
 
     public String findError(int id){

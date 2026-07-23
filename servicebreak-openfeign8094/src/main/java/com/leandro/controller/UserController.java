@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.Map;
 
 @RestController
 @RequestMapping("hellos")
@@ -18,5 +19,10 @@ public class UserController {
     @RequestMapping("/find")
     public User findById(@RequestParam("id") int id){
         return userClient.findById(id);
+    }
+
+    @RequestMapping ("/login")
+    public Map<String, Object> login(@RequestParam String username, @RequestParam String password) {
+        return userClient.login(username, password);
     }
 }
